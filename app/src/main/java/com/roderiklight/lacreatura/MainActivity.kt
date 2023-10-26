@@ -12,21 +12,22 @@ import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 
-    private var temperature: String = ""
     private var selectedOption: Int = 0
+    private var result: Double = 0.0
+    private var value: String = ""
+    private lateinit var total: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val result = findViewById<TextView>(R.id.textView2)
         val option = findViewById<Spinner>(R.id.spinner)
         val temp = findViewById<EditText>(R.id.editTextNumberDecimal)
         val button = findViewById<Button>(R.id.button)
+        total = findViewById(R.id.textView2)
 
         button.setOnClickListener{
-            temperature = temp.text.toString()
-
+            value = temp.text.toString()
             conversion(selectedOption)
 
         }
@@ -57,22 +58,28 @@ class MainActivity : AppCompatActivity() {
         when //haces tus momos en video
         (option){
             0 -> {
-
+                result = (value.toDouble() * 9/5)+ 32
+                total.text =result.toString()
             }
             1 ->{
-
+                result = value.toDouble() + 273.15
+                total.text = result.toString()
             }
             2 ->{
-
+                result = (value.toDouble() - 32) * 5/9
+                total.text = result.toString()
             }
             3 ->{
-
+                result = (value.toDouble() + 459.67) * 5/9
+                total.text = result.toString()
             }
             4 ->{
-
+                result = value.toDouble() - 273.15
+                total.text = result.toString()
             }
             5 ->{
-
+                result = (value.toDouble() * 9/5) - 459.67
+                total.text = result.toString()
             }
         }
 
